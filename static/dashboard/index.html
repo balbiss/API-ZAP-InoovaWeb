@@ -17,14 +17,14 @@
           <div class="center aligned mb-4">
             <i class="whatsapp icon bi-whatsapp"></i> 
             <h2 class="ui header">INOOVAZAP Manager</h2>
-            <p class="text-muted">Log in to access the dashboard</p>
+            <p class="text-muted">Faça login para acessar o painel</p>
           </div>
           <form id="loginForm" class="ui form mb-4">
             <div class="field mb-4" style="text-align:left;">
-              <label for="loginToken">Access Token</label>
-              <input type="text" id="loginToken" placeholder="Type your access token">
+              <label for="loginToken">Token de Acesso</label>
+              <input type="text" id="loginToken" placeholder="Digite seu token de acesso">
               <div class="ui description">
-                  Token used to authenticate your requests to the API.
+                  Token usado para autenticar suas requisições.
               </div>
             </div>
             <div class="ui fluid buttons">
@@ -33,17 +33,17 @@
               </button>
               <div class="or"></div>
               <button type="button" class="ui button" id="loginAsAdminBtn">
-                <i class="shield alternate icon"></i>Admin Login
+                <i class="shield alternate icon"></i>Login de Admin
               </button>
             </div>
           </form>
           <div class="ui info message" style="text-align:left;">
             <div class="header mb-4">
-              <i class="user icon"></i> User Login
+              <i class="user icon"></i> Login de Usuário
             </div>
-            <p>Please enter user credentials:</p>
+            <p>Por favor insira as credenciais:</p>
             <ul>
-              <li>Use your user token in the field above</li>
+              <li>Use seu token de usuário no campo acima</li>
             </ul>
           </div>
         </div>
@@ -65,7 +65,7 @@
           <span id="user-role-text">...</span>
         </div>
         <div class="item">
-          <a href='#' id='menulogout'>Logout</a></div>
+          <a href='#' id='menulogout'>Sair</a></div>
         </div>
       </div>
     </div>
@@ -78,11 +78,11 @@
     <div class="ui stackable grid">
       <div class="row">
         <div class="left floated left aligned ten wide column">
-          <h1 class="ui header">Instances Management</h1>
+          <h1 class="ui header">Gerenciamento de Instâncias</h1>
         </div>
         <div class="right floated right aligned six wide column">
           <button class="ui primary button" id='addInstanceButton'>
-            <i class="plus icon"></i> Add Instance
+            <i class="plus icon"></i> Nova Instância
           </button>
         </div>
       </div>
@@ -96,9 +96,9 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Connected</th>
-            <th>Logged In</th>
-            <th>Actions</th>
+            <th>Conectado</th>
+            <th>Logado</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody id="instances-body"></tbody>
@@ -116,8 +116,8 @@
     </div>
   </div>
 
-  <!-- Dashboard -->
-  <div class="ui container fluid p1 hidden maingrid" id="mainDashboard">
+  <!-- Painel -->
+  <div class="ui container fluid p1 hidden maingrid" id="mainPainel">
 
     <div class="ui horizontal divider widget"> Configuration </div>
     <div class="ui three column stackable grid cards">
@@ -186,28 +186,28 @@
       </div>
       <div class="blue card hidden widget" style="cursor: pointer;" id="deleteMessage">
         <div class="content"><a class="ui blue right ribbon label">Chat</a>
-          <div class="header">Delete Message</div>
-          <div class="description"> Deletes your sent message.</div>
+          <div class="header">Excluir Message</div>
+          <div class="description"> Excluirs your sent message.</div>
         </div>
       </div>
     </div>
 
-    <div class="ui horizontal divider widget"> Groups </div>
+    <div class="ui horizontal divider widget"> Grupos </div>
     <div class="ui three column stackable grid cards">
       <div class="green card hidden widget" style="cursor: pointer;" id="groupsList">
-        <div class="content"><a class="ui green right ribbon label">Groups</a>
-          <div class="header">List Groups</div>
+        <div class="content"><a class="ui green right ribbon label">Grupos</a>
+          <div class="header">List Grupos</div>
           <div class="description">View all your WhatsApp groups.</div>
         </div>
       </div>
       <div class="green card hidden widget" style="cursor: pointer;" id="createGroup">
-        <div class="content"><a class="ui green right ribbon label">Groups</a>
+        <div class="content"><a class="ui green right ribbon label">Grupos</a>
           <div class="header">Create Group</div>
           <div class="description">Create a new WhatsApp group.</div>
         </div>
       </div>
       <div class="green card hidden widget" style="cursor: pointer;" id="joinGroup">
-        <div class="content"><a class="ui green right ribbon label">Groups</a>
+        <div class="content"><a class="ui green right ribbon label">Grupos</a>
           <div class="header">Join Group</div>
           <div class="description">Join a group using invite link.</div>
         </div>
@@ -216,7 +216,7 @@
 
   </div>
 
-  <!-- Groups Main Container -->
+  <!-- Grupos Main Container -->
   <div class="ui container fluid p1 hidden" id="groupsMainContainer">
     <!-- Main Header -->
     <div class="ui container fluid main-header">
@@ -226,21 +226,21 @@
             <h1 class="ui header">
               <i class="users icon"></i>
               <div class="content">
-                Groups Manager
+                Grupos Manager
                 <div class="sub header">Manage your WhatsApp groups</div>
               </div>
             </h1>
           </div>
           <div class="right floated right aligned six wide column">
-            <button class="ui primary button" id="backToDashboard">
-              <i class="left arrow icon"></i> Back to Dashboard
+            <button class="ui primary button" id="backToPainel">
+              <i class="left arrow icon"></i> Back to Painel
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Groups Filter and Search -->
+    <!-- Grupos Filter and Search -->
     <div class="ui segment">
       <div class="ui stackable grid">
         <div class="six wide column">
@@ -251,15 +251,15 @@
         </div>
         <div class="four wide column">
           <select class="ui fluid dropdown" id="groupsFilter">
-            <option value="">All Groups</option>
-            <option value="normal">Normal Groups</option>
+            <option value="">All Grupos</option>
+            <option value="normal">Normal Grupos</option>
             <option value="community">Communities</option>
-            <option value="community_group">Community Groups</option>
+            <option value="community_group">Community Grupos</option>
           </select>
         </div>
         <div class="three wide column">
           <div class="ui basic buttons fluid">
-            <button class="ui button" id="refreshGroups">
+            <button class="ui button" id="refreshGrupos">
               <i class="refresh icon"></i> Refresh
             </button>
           </div>
@@ -272,18 +272,18 @@
       </div>
     </div>
 
-    <!-- Groups Loading -->
+    <!-- Grupos Loading -->
     <div class="ui active inverted dimmer" id="groupsLoading">
       <div class="ui text loader">Loading groups...</div>
     </div>
 
-    <!-- Groups List Container -->
+    <!-- Grupos List Container -->
     <div class="ui relaxed divided list" id="groupsListContainer">
-      <!-- Groups will be populated here -->
+      <!-- Grupos will be populated here -->
     </div>
 
-    <!-- No Groups Message -->
-    <div class="ui placeholder segment hidden" id="noGroupsMessage">
+    <!-- No Grupos Message -->
+    <div class="ui placeholder segment hidden" id="noGruposMessage">
       <div class="ui icon header">
         <i class="users icon"></i>
         No groups found
@@ -294,7 +294,7 @@
     </div>
   </div>
 
-  <!-- Session Modals -->
+  <!-- Sessão Modals -->
 
   <div class="ui modal" id="modalLoginWithCode"><i class="close icon"></i>
     <div class="header"> Getting Pair Code </div>
@@ -302,7 +302,7 @@
       <div class="ui message info">
         <div class="header" id="pairInfo">How to pair?</div>
         <ol id="pairHelp">
-          <li>Open your Whatsapp</li>
+          <li>Abrir your Whatsapp</li>
           <li>Link a device</li>
           <li>Link with pair code</li>
         </ol>
@@ -323,19 +323,19 @@
           <label>Webhook Events</label>
           <select id="webhookEvents" class="ui fluid dropdown" multiple="">
             <option value="">Select Events</option>
-            <!-- Messages and Communication -->
+            <!-- Mensagens and Communication -->
             <option value="Message">Message</option>
             <option value="UndecryptableMessage">Undecryptable Message</option>
             <option value="Receipt">Receipt</option>
             <option value="MediaRetry">Media Retry</option>
-            <!-- Groups and Contacts -->
+            <!-- Grupos and Contacts -->
             <option value="GroupInfo">Group Info</option>
             <option value="JoinedGroup">Joined Group</option>
             <option value="Picture">Picture</option>
             <option value="BlocklistChange">Blocklist Change</option>
             <option value="Blocklist">Blocklist</option>
-            <!-- Connection and Session -->
-            <option value="Connected">Connected</option>
+            <!-- Connection and Sessão -->
+            <option value="Conectado">Conectado</option>
             <option value="Disconnected">Disconnected</option>
             <option value="ConnectFailure">Connect Failure</option>
             <option value="KeepAliveRestored">Keep Alive Restored</option>
@@ -459,7 +459,7 @@
     <div class="actions">
       <div class="ui cancel button secondary">Cancel</div>
       <div class="ui button" id="testS3Connection">Test Connection</div>
-      <div class="ui red button" id="deleteS3Config">Delete Configuration</div>
+      <div class="ui red button" id="deleteS3Config">Excluir Configuration</div>
       <div class="ui positive right labeled icon button" id="saveS3Config">Save<i class="checkmark icon"></i></div>
     </div>
   </div>
@@ -555,12 +555,12 @@
     </div>
     <div class="actions">
       <div class="ui cancel button secondary">Cancel</div>
-      <div class="ui red button" id="deleteHmacConfig">Delete Configuration</div>
+      <div class="ui red button" id="deleteHmacConfig">Excluir Configuration</div>
       <div class="ui positive right labeled icon button" id="saveHmacConfig">Save<i class="checkmark icon"></i></div>
     </div>
   </div>
 
-  <!-- Add Instance Modal -->
+  <!-- Nova Instância Modal -->
   <div class="ui large modal" id="addInstanceModal">
     <i class="close icon"></i>
     <div class="header">Add New Instance</div>
@@ -584,19 +584,19 @@
           <label>Events <span class="required">*</span></label>
           <select name="events" id="webhookEventsInstance" class="ui fluid dropdown" multiple="" required>
             <option value="">Select Events</option>
-            <!-- Messages and Communication -->
+            <!-- Mensagens and Communication -->
             <option value="Message">Message</option>
             <option value="UndecryptableMessage">Undecryptable Message</option>
             <option value="Receipt">Receipt</option>
             <option value="MediaRetry">Media Retry</option>
-            <!-- Groups and Contacts -->
+            <!-- Grupos and Contacts -->
             <option value="GroupInfo">Group Info</option>
             <option value="JoinedGroup">Joined Group</option>
             <option value="Picture">Picture</option>
             <option value="BlocklistChange">Blocklist Change</option>
             <option value="Blocklist">Blocklist</option>
-            <!-- Connection and Session -->
-            <option value="Connected">Connected</option>
+            <!-- Connection and Sessão -->
+            <option value="Conectado">Conectado</option>
             <option value="Disconnected">Disconnected</option>
             <option value="ConnectFailure">Connect Failure</option>
             <option value="KeepAliveRestored">Keep Alive Restored</option>
@@ -779,16 +779,16 @@
     </div>
   </div>
 
-  <!-- Instance Delete Confirmation Modal -->
+  <!-- Instance Excluir Confirmation Modal -->
 
   <div class="ui small modal" id="deleteInstanceModal">
-    <div class="header">Delete Instance</div>
+    <div class="header">Excluir Instance</div>
     <div class="content">
       <p>Are you sure you want to delete this instance? This action cannot be undone.</p>
     </div>
     <div class="actions">
       <div class="ui negative button">No</div>
-      <div class="ui positive right labeled icon button" id="confirmDeleteButton">
+      <div class="ui positive right labeled icon button" id="confirmExcluirButton">
         Yes
         <i class="checkmark icon"></i>
       </div>
@@ -842,8 +842,8 @@
     </div>
   </div>
 
-  <div class="ui modal" id="modalDeleteMessage"><i class="close icon"></i>
-    <div class="header"> Delete Message </div>
+  <div class="ui modal" id="modalExcluirMessage"><i class="close icon"></i>
+    <div class="header"> Excluir Message </div>
     <div class="content">
       <div class="ui message info hidden" id="deleteMessageContainer"></div>
       <div class="ui form">
@@ -853,11 +853,11 @@
     </div>
     <div class="actions">
       <div class="ui cancel button secondary">Close</div>
-      <div class="ui positive right labeled icon button">Delete<i class="trash icon"></i></div>
+      <div class="ui positive right labeled icon button">Excluir<i class="trash icon"></i></div>
     </div>
   </div>
 
-  <!-- Groups Modals -->
+  <!-- Grupos Modals -->
 
   <!-- Group Details Modal -->
   <div class="ui large modal" id="modalGroupDetails">
@@ -902,9 +902,9 @@
     </div>
     <div class="actions">
       <div class="ui stackable grid">
-        <!-- Basic Actions -->
+        <!-- Basic Ações -->
         <div class="eight wide column">
-          <h5 class="ui header">Basic Actions</h5>
+          <h5 class="ui header">Basic Ações</h5>
           <div class="ui fluid buttons">
             <button class="ui blue button" id="editGroupInfoBtn">
               <i class="edit icon"></i> Edit Info
@@ -915,9 +915,9 @@
           </div>
         </div>
         
-        <!-- Admin Actions -->
-        <div class="eight wide column" id="adminActionsSection" style="display: none;">
-          <h5 class="ui header">Admin Actions</h5>
+        <!-- Admin Ações -->
+        <div class="eight wide column" id="adminAçõesSection" style="display: none;">
+          <h5 class="ui header">Admin Ações</h5>
           <div class="ui fluid buttons">
             <button class="ui orange button" id="groupSettingsBtn">
           <i class="settings icon"></i> Settings
@@ -1107,7 +1107,7 @@
           </div>
         </div>
         
-        <h4 class="ui dividing header">Disappearing Messages</h4>
+        <h4 class="ui dividing header">Disappearing Mensagens</h4>
         <div class="field">
           <label>Message Timer</label>
           <select class="ui dropdown" id="disappearingTimerSelect">
@@ -1117,7 +1117,7 @@
             <option value="90d">90 days</option>
           </select>
           <div class="ui description">
-            Messages will automatically disappear after the selected time.
+            Mensagens will automatically disappear after the selected time.
           </div>
         </div>
 

@@ -3,7 +3,7 @@ let scanned = false;
 let updateAdminTimeout = null;
 let updateUserTimeout = null;
 let updateInterval = 5000;
-let instanceToDelete = null;
+let instanceToExcluir = null;
 let isAdminLogin = false;
 let currentInstanceData = null;
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   $('#deleteInstanceModal').modal({
     closable: true,
     onDeny: function() {
-      instanceToDelete = null;
+      instanceToExcluir = null;
     }
   });
 
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
     $('.ui.info.message').html(`
         <div class="header mb-4">
             <i class="user shield icon"></i>
-            Admin Login
+            Login de Admin
         </div>
         <p>Please enter your admin credentials:</p>
         <ul>
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('deleteMessage').addEventListener('click', function() {
     document.getElementById('deleteMessageContainer').innerHTML='';
     document.getElementById("deleteMessageContainer").classList.add('hidden');
-    $('#modalDeleteMessage').modal({onApprove: function() {
+    $('#modalExcluirMessage').modal({onApprove: function() {
       deleteMessage().then((result)=>{
         console.log(result);
         document.getElementById("deleteMessageContainer").classList.remove('hidden');
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
     testS3Connection();
   });
 
-  // S3 Delete Configuration
+  // S3 Excluir Configuration
   document.getElementById('deleteS3Config').addEventListener('click', function() {
     deleteS3Config();
   });
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleHmacKeyVisibility();
   });
 
-  // HMAC Delete Configuration
+  // HMAC Excluir Configuration
   document.getElementById('deleteHmacConfig').addEventListener('click', function() {
     deleteHmacConfig();
   });
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 async function addInstance(data) {
-  console.log("Add Instance...");
+  console.log("Nova Instância...");
   const admintoken = getLocalStorageItem('admintoken');
   const myHeaders = new Headers();
   myHeaders.append('authorization', admintoken);
@@ -652,7 +652,7 @@ function updateAdmin() {
   const current = getLocalStorageItem("currentInstance")
   if(!current) {
     // get all instances status
-    getUsers().then((result) => {
+    getUsuários().then((result) => {
       if(result.success==true) {
         populateInstances(result.data)
       } 
@@ -676,7 +676,7 @@ function handleAdminLogin(token,notifications=false) {
   $('.adminlogin').show();
   const currentInstance = getLocalStorageItem("currentInstance");
 
-  getUsers().then((result) => {
+  getUsuários().then((result) => {
     if(result.success==true) {
 
       showAdminUser();
@@ -725,15 +725,15 @@ function showSuccess(message) {
 }
 
 function deleteInstance(id) {
-  instanceToDelete = id;
+  instanceToExcluir = id;
   $('#deleteInstanceModal').modal({
     onApprove: function() {
-      performDelete(instanceToDelete);
+      performExcluir(instanceToExcluir);
     }
   }).modal('show');
 }
 
-async function performDelete(id) {
+async function performExcluir(id) {
   console.log('Deleting instance with ID:', id);
   const admintoken = getLocalStorageItem('admintoken');
   const myHeaders = new Headers();
@@ -746,13 +746,13 @@ async function performDelete(id) {
   data = await res.json();
   if(data.success===true) {
     $('#instance-row-' + id).remove();
-    showDeleteSuccess();
+    showExcluirSuccess();
   } else {
     showError('Error deleting instance');
   }
 }
 
-function showDeleteSuccess() {
+function showExcluirSuccess() {
   $('body').toast({
     class: 'success',
     message: 'Instance deleted successfully',
@@ -761,7 +761,7 @@ function showDeleteSuccess() {
   });
 }
 
-function openDashboard(id,token) {
+function openPainel(id,token) {
   setLocalStorageItem('currentInstance', id, 6);
   setLocalStorageItem('token', token, 6);
   $(`#instance-card-${id}`).removeClass('hidden');
@@ -869,11 +869,11 @@ function doUserInfo() {
     }
     userInfo(phone).then((data) => {
       document.getElementById("userInfoContainer").classList.remove('hidden');
-      if (data.success && data.data && data.data.Users) {
+      if (data.success && data.data && data.data.Usuários) {
           const userInfoDiv = document.getElementById('userInfoContainer');
           userInfoDiv.innerHTML = '';
           
-          for (const [userJid, userData] of Object.entries(data.data.Users)) {
+          for (const [userJid, userData] of Object.entries(data.data.Usuários)) {
               const userElement = document.createElement('div');
               userElement.className = 'user-entry';
               
@@ -957,7 +957,7 @@ async function status() {
   return data;
 }
 
-async function getUsers() {
+async function getUsuários() {
   console.log("Get users...");
   const admintoken = getLocalStorageItem('admintoken');
   const myHeaders = new Headers();
@@ -1195,11 +1195,11 @@ function populateInstances(instances) {
         <td><i class="${instance.connected ? 'check green' : 'times red'} icon"></i> <span class="status ${instance.connected}">${instance.connected ? 'Yes' : 'No'}</span></td>
         <td><i class="${instance.loggedIn ? 'check green' : 'times red'} icon"></i> <span class="status ${instance.loggedIn}">${instance.loggedIn ? 'Yes' : 'No'}</span></td>
         <td>
-          <button class="ui primary button dashboard-button" onclick="openDashboard('${instance.id}', '${instance.token}')">
-            <i class="external alternate icon"></i> Open
+          <button class="ui primary button dashboard-button" onclick="openPainel('${instance.id}', '${instance.token}')">
+            <i class="external alternate icon"></i> Abrir
           </button>
           <button class="ui negative button dashboard-button" onclick="deleteInstance('${instance.id}')">
-            <i class="trash alternate icon"></i> Delete
+            <i class="trash alternate icon"></i> Excluir
           </button>
         </td>
       </tr>
@@ -1217,11 +1217,11 @@ function populateInstances(instances) {
                           <div class="ui labels" style="margin-top: 0.5em;">
                               <div class="ui ${instance.connected ? 'green' : 'red'} horizontal label">
                                   <i class="${instance.connected ? 'check' : 'times'} icon"></i>
-                                  ${instance.connected ? 'Connected' : 'Disconnected'}
+                                  ${instance.connected ? 'Conectado' : 'Disconnected'}
                               </div>
                               <div class="ui ${instance.loggedIn ? 'green' : 'red'} horizontal label">
                                   <i class="${instance.loggedIn ? 'check' : 'times'} icon"></i>
-                                  ${instance.loggedIn ? 'Logged In' : 'Logged Out'}
+                                  ${instance.loggedIn ? 'Logado' : 'Logged Out'}
                               </div>
                           </div>
                       </div>
@@ -1280,7 +1280,7 @@ function populateInstances(instances) {
                           `<img src="${instance.qrcode}" style="max-height: 100%; max-width: 100%;">
                       </div>
                       <div>
-                        Open WhatsApp on your phone and tap<br/><i class="ellipsis vertical icon"></i>> Linked devices > Link a device.
+                        Abrir WhatsApp on your phone and tap<br/><i class="ellipsis vertical icon"></i>> Linked devices > Link a device.
                           ` : 
                                 `<div class="ui icon header" style="text-align: center;">
                                     <i class="qrcode icon" style="font-size: 3em;"></i>
@@ -1297,8 +1297,8 @@ function populateInstances(instances) {
             
             <div class="extra content">
               <button class="ui primary positive button dashboard-button ${instance.connected === true ? 'hidden' : ''}" id="button-connect-${instance.id}" onclick="connect('${instance.token}')">Connect</button>
-              <button class="ui primary negative button dashboard-button ${instance.connected === true ? '' : 'hidden'}" id="button-logout-${instance.id}" onclick="logout('${instance.token}')">Logout</button>
-              <button class="ui primary positive button dashboard-button ${instance.connected === true && instance.loggedIn === false ? '' : 'hidden'} id="button-logout-${instance.id}" onclick="modalPairPhone()">Login with Pairing Code</button>
+              <button class="ui primary negative button dashboard-button ${instance.connected === true ? '' : 'hidden'}" id="button-logout-${instance.id}" onclick="logout('${instance.token}')">Sair</button>
+              <button class="ui primary positive button dashboard-button ${instance.connected === true && instance.loggedIn === false ? '' : 'hidden'} id="button-logout-${instance.id}" onclick="modalPairPhone()">Login com Código de Pareamento</button>
               </div>
         </div>
         `;
@@ -1772,7 +1772,7 @@ async function saveProxyConfig() {
     
     const data = await res.json();
     if (data.success) {
-      showSuccess('Proxy configuration saved successfully');
+      showSuccess('Configuração de Proxy saved successfully');
       $('#modalProxyConfig').modal('hide');
     } else {
       showError('Failed to save proxy configuration: ' + (data.error || 'Unknown error'));

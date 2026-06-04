@@ -84,13 +84,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Interactive demo
-    initDemo();
+    initDemonstração();
     
     // Start coffee animation
     animateCoffee();
 });
 
-function initDemo() {
+function initDemonstração() {
     const demoSection = document.querySelector('.demo-section');
     if (!demoSection) return;
     
@@ -143,7 +143,7 @@ function initDemo() {
                 
                 const scenario = button.getAttribute('data-scenario');
                 if (demoScenarios[scenario]) {
-                    playDemoScenario(demoScenarios[scenario], chatBody);
+                    playDemonstraçãoScenario(demoScenarios[scenario], chatBody);
                 }
             });
         });
@@ -151,12 +151,12 @@ function initDemo() {
         // Auto play the first scenario
         setTimeout(() => {
             demoButtons[0].classList.add('active-btn');
-            playDemoScenario(demoScenarios['message'], chatBody);
+            playDemonstraçãoScenario(demoScenarios['message'], chatBody);
         }, 1000);
     }
 }
 
-function playDemoScenario(scenario, chatBody) {
+function playDemonstraçãoScenario(scenario, chatBody) {
     // Clear the chat
     chatBody.innerHTML = '';
     

@@ -295,7 +295,7 @@
   <div class="content">
     <div class="ui form">
       <div class="field">
-        <label>Access Token</label>
+        <label>Token de Acesso</label>
         <input type="password" id="tokenInput" placeholder="Enter your user token or admin token">
         <div class="ui info message">
           <p>This page requires authentication. Please enter your user token or admin token to continue.</p>
@@ -341,7 +341,7 @@
       </div>
     </div>
     
-    <div class="chat-messages" id="chatMessages">
+    <div class="chat-messages" id="chatMensagens">
       <div class="no-selection" style="padding: 40px; text-align: center; color: #666; font-size: 14px;">
         <div style="margin-bottom: 10px; font-weight: 600;">Chat History Viewer</div>
         <p style="margin: 0;">Select a chat on the left to see the entries and json for them.</p>
@@ -445,9 +445,9 @@ function loadInstances() {
   // Load all necessary data in parallel
   Promise.all([
     loadChatHistory(),
-    loadSessionStatus(),
+    loadSessãoStatus(),
     loadContacts(),
-    loadGroups()
+    loadGrupos()
   ]).then(() => {
     populateInstanceDropdown();
     $('#historyContainer').show();
@@ -489,7 +489,7 @@ function loadChatHistory() {
   });
 }
 
-function loadSessionStatus() {
+function loadSessãoStatus() {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: '/session/status',
@@ -499,7 +499,7 @@ function loadSessionStatus() {
       },
       success: function(response) {
         sessionInfo = response.data || response;
-        console.log('Session info loaded:', sessionInfo);
+        console.log('Sessão info loaded:', sessionInfo);
         resolve();
       },
       error: function(xhr) {
@@ -533,7 +533,7 @@ function loadContacts() {
   });
 }
 
-function loadGroups() {
+function loadGrupos() {
   return new Promise((resolve, reject) => {
     $.ajax({
       url: '/group/list',
@@ -544,12 +544,12 @@ function loadGroups() {
       success: function(response) {
         const groupsData = response.data || response;
         // Convert groups array to JID -> info mapping
-        if (groupsData.Groups) {
-          groupsData.Groups.forEach(group => {
+        if (groupsData.Grupos) {
+          groupsData.Grupos.forEach(group => {
             groupsInfo[group.JID] = group;
           });
         }
-        console.log('Groups loaded:', Object.keys(groupsInfo).length, 'groups');
+        console.log('Grupos loaded:', Object.keys(groupsInfo).length, 'groups');
         resolve();
       },
       error: function(xhr) {
@@ -662,14 +662,14 @@ function renderChatList(instance, chats) {
     chatItem.click(function() {
       $('.chat-item').removeClass('active');
       $(this).addClass('active');
-      loadChatMessages(instance, chatJid, displayName);
+      loadChatMensagens(instance, chatJid, displayName);
     });
     
     chatList.append(chatItem);
   });
 }
 
-function loadChatMessages(instance, chatJid, displayName) {
+function loadChatMensagens(instance, chatJid, displayName) {
   currentChatJid = chatJid;
   
   // Update header with better info
@@ -687,7 +687,7 @@ function loadChatMessages(instance, chatJid, displayName) {
   $('#chatHeader').show();
   
   // Show loading
-  $('#chatMessages').html('<div class="loading"><div class="ui active loader"></div></div>');
+  $('#chatMensagens').html('<div class="loading"><div class="ui active loader"></div></div>');
   
   $.ajax({
     url: `/chat/history?chat_jid=${encodeURIComponent(chatJid)}&limit=100`,
@@ -697,11 +697,11 @@ function loadChatMessages(instance, chatJid, displayName) {
     },
     success: function(response) {
       const messages = response.data || response; // Handle both wrapped and unwrapped responses
-      window.currentMessages = messages; // Store for toggle functionality
-      renderMessages(messages);
+      window.currentMensagens = messages; // Store for toggle functionality
+      renderMensagens(messages);
     },
     error: function(xhr) {
-      $('#chatMessages').html(`
+      $('#chatMensagens').html(`
         <div class="error-message">
           Failed to load messages: ${xhr.responseJSON?.error || 'Unknown error'}
         </div>
@@ -710,8 +710,8 @@ function loadChatMessages(instance, chatJid, displayName) {
   });
 }
 
-function renderMessages(messages) {
-  const container = $('#chatMessages');
+function renderMensagens(messages) {
+  const container = $('#chatMensagens');
   container.empty();
   
   if (messages.length === 0) {
@@ -734,9 +734,9 @@ function renderMessages(messages) {
   const table = $('<table class="messages-table"></table>');
   
   // Reverse messages to show oldest first
-  const sortedMessages = [...messages].reverse();
+  const sortedMensagens = [...messages].reverse();
   
-  sortedMessages.forEach((message, index) => {
+  sortedMensagens.forEach((message, index) => {
     const isMe = isMyMessage(message.sender_jid);
     const timestamp = new Date(message.timestamp).toLocaleString();
     
@@ -866,12 +866,12 @@ function toggleMessageJson(row, message) {
 
 function clearChatView() {
   $('#chatHeader').hide();
-  $('#chatMessages').html('<div style="padding: 40px; text-align: center; color: #666; font-size: 14px;"><div style="margin-bottom: 10px; font-weight: 600;">Chat History Viewer</div><p style="margin: 0;">Select a chat on the left to see the entries and json for them.</p></div>');
+  $('#chatMensagens').html('<div style="padding: 40px; text-align: center; color: #666; font-size: 14px;"><div style="margin-bottom: 10px; font-weight: 600;">Chat History Viewer</div><p style="margin: 0;">Select a chat on the left to see the entries and json for them.</p></div>');
   currentChatJid = '';
 }
 
 function showLoading() {
-  $('#chatMessages').html('<div class="loading"><div class="ui active loader"></div><p style="text-align: center; margin-top: 20px;">Loading chat history, contacts, and groups...</p></div>');
+  $('#chatMensagens').html('<div class="loading"><div class="ui active loader"></div><p style="text-align: center; margin-top: 20px;">Loading chat history, contacts, and groups...</p></div>');
 }
 
 // Helper function to check if a message is from the current user

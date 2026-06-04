@@ -1,4 +1,4 @@
-// Groups Manager JavaScript
+// Grupos Manager JavaScript
 // Manages all WhatsApp groups functionality
 // 
 // ADMIN PERMISSIONS: Modified to always show admin actions and let backend handle permissions
@@ -53,7 +53,7 @@ function getGroupTypeInfo(groupData) {
 }
 
 // API function to get contacts without automatic download
-async function getContactsForGroups() {
+async function getContactsForGrupos() {
     const token = getLocalStorageItem('token');
     const myHeaders = new Headers();
     myHeaders.append('token', token);
@@ -83,14 +83,14 @@ async function getContactsForGroups() {
 
 // Initialize groups functionality when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    initializeGroupsEvents();
-    initializeGroupsModals();
+    initializeGruposEvents();
+    initializeGruposModals();
 });
 
-function initializeGroupsEvents() {
+function initializeGruposEvents() {
     // Main dashboard group cards
     $('#groupsList').on('click', function() {
-        showGroupsManager();
+        showGruposManager();
     });
 
     $('#createGroup').on('click', function() {
@@ -101,9 +101,9 @@ function initializeGroupsEvents() {
         showJoinGroupModal();
     });
 
-    // Groups manager events
-    $('#backToDashboard').on('click', function() {
-        hideGroupsManager();
+    // Grupos manager events
+    $('#backToPainel').on('click', function() {
+        hideGruposManager();
     });
 
     $('#createNewGroup, #createFirstGroup').on('click', function() {
@@ -111,21 +111,21 @@ function initializeGroupsEvents() {
     });
 
     // Refresh groups
-    $('#refreshGroups').on('click', function() {
-        loadGroups();
+    $('#refreshGrupos').on('click', function() {
+        loadGrupos();
     });
 
     // Search and filter
     $('#groupsSearch').on('input', function() {
-        filterGroups();
+        filterGrupos();
     });
 
     $('#groupsFilter').on('change', function() {
-        filterGroups();
+        filterGrupos();
     });
 }
 
-function initializeGroupsModals() {
+function initializeGruposModals() {
     // Initialize dropdowns
     $('#groupsFilter').dropdown();
     $('#participantsDropdown').dropdown({
@@ -274,27 +274,27 @@ function initializeGroupsModals() {
     });
 }
 
-function showGroupsManager() {
+function showGruposManager() {
     // Hide only the main dashboard content, not the header
-    $('#mainDashboard').addClass('hidden');
+    $('#mainPainel').addClass('hidden');
     $('#groupsMainContainer').removeClass('hidden');
-    loadGroups();
+    loadGrupos();
 }
 
-function hideGroupsManager() {
+function hideGruposManager() {
     $('#groupsMainContainer').addClass('hidden');
     // Show only the main dashboard content, not affecting the header
-    $('#mainDashboard').removeClass('hidden');
+    $('#mainPainel').removeClass('hidden');
     if (groupsUpdateInterval) {
         clearInterval(groupsUpdateInterval);
         groupsUpdateInterval = null;
     }
 }
 
-async function loadGroups() {
+async function loadGrupos() {
     try {
         $('#groupsLoading').addClass('active');
-        $('#noGroupsMessage').addClass('hidden');
+        $('#noGruposMessage').addClass('hidden');
         
         // Try to get user JID first and ensure it's properly stored
         const userJID = await getUserInfoAndSetJID();
@@ -308,34 +308,34 @@ async function loadGroups() {
             }
         }
         
-        const response = await getGroups();
+        const response = await getGrupos();
         
-        if (response.code === 200 && response.data && response.data.Groups) {
+        if (response.code === 200 && response.data && response.data.Grupos) {
             groupsCache = response.data;
-            displayGroups(response.data.Groups || []);
+            displayGrupos(response.data.Grupos || []);
         } else {
             showError('Failed to load groups: ' + (response.error || 'Unknown error'));
-            $('#noGroupsMessage').removeClass('hidden');
+            $('#noGruposMessage').removeClass('hidden');
         }
     } catch (error) {
         console.error('Error loading groups:', error);
         showError('Error loading groups');
-        $('#noGroupsMessage').removeClass('hidden');
+        $('#noGruposMessage').removeClass('hidden');
     } finally {
         $('#groupsLoading').removeClass('active');
     }
 }
 
-function displayGroups(groups) {
+function displayGrupos(groups) {
     const container = $('#groupsListContainer');
     container.empty();
 
     if (!groups || groups.length === 0) {
-        $('#noGroupsMessage').removeClass('hidden');
+        $('#noGruposMessage').removeClass('hidden');
         return;
     }
 
-    $('#noGroupsMessage').addClass('hidden');
+    $('#noGruposMessage').addClass('hidden');
 
     groups.forEach(group => {
         const groupItem = createGroupListItem(group);
@@ -414,7 +414,7 @@ function createGroupListItem(group) {
     // Show linked parent for community groups
     let parentInfo = '';
     if (typeInfo.label === 'Community Group' && group.LinkedParentJID) {
-        const parentGroup = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === group.LinkedParentJID) : null;
+        const parentGroup = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === group.LinkedParentJID) : null;
         const parentName = parentGroup ? parentGroup.Name : 'Unknown Community';
         parentInfo = `<div class="meta"><i class="sitemap icon"></i>Part of: ${escapeHtml(parentName)}</div>`;
     }
@@ -526,24 +526,24 @@ function populateGroupDetailsModal(groupData) {
     if (groupData.IsJoinApprovalRequired) featuresText += ', Approval required';
     
     // Add group features info
-    if ($('#groupDetailsFeatures').length === 0) {
+    if ($('#groupDetailsRecursos').length === 0) {
         $('#groupDetailsCreated').parent().after(`
             <div class="item">
-                <div class="header">Type & Features</div>
-                <div id="groupDetailsFeatures">${featuresText}</div>
+                <div class="header">Type & Recursos</div>
+                <div id="groupDetailsRecursos">${featuresText}</div>
             </div>
         `);
     } else {
-        $('#groupDetailsFeatures').text(featuresText);
+        $('#groupDetailsRecursos').text(featuresText);
     }
 
     // Show linked parent for community groups
     if (typeInfo.label === 'Community Group' && groupData.LinkedParentJID) {
-        const parentGroup = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === groupData.LinkedParentJID) : null;
+        const parentGroup = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === groupData.LinkedParentJID) : null;
         const parentName = parentGroup ? parentGroup.Name : 'Unknown Community';
         
         if ($('#groupDetailsParent').length === 0) {
-            $('#groupDetailsFeatures').parent().after(`
+            $('#groupDetailsRecursos').parent().after(`
                 <div class="item">
                     <div class="header">Parent Community</div>
                     <div id="groupDetailsParent">${escapeHtml(parentName)}</div>
@@ -557,7 +557,7 @@ function populateGroupDetailsModal(groupData) {
     }
 
     // Show/hide admin actions based on user permissions
-    const adminSection = $('#adminActionsSection');
+    const adminSection = $('#adminAçõesSection');
     
     if (isAdmin || isSuperAdmin) {
         adminSection.show();
@@ -595,7 +595,7 @@ function populateGroupDetailsModal(groupData) {
                     </button>
                 `);
                 
-                // Promote/Demote buttons - based on current user permissions
+                // Promote/Demonstraçãote buttons - based on current user permissions
                 if (isSuperAdmin) {
                     // Super admins can promote/demote anyone
                     if (!participantIsAdmin && !participantIsSuperAdmin) {
@@ -606,10 +606,10 @@ function populateGroupDetailsModal(groupData) {
                             </button>
                         `);
                     } else if (participantIsAdmin && !participantIsSuperAdmin) {
-                        // Demote from admin
+                        // Demonstraçãote from admin
                         buttons.push(`
-                            <button class="ui mini grey button" onclick="demoteParticipant('${participant.JID}')" title="Demote from admin">
-                                <i class="star outline icon"></i> Demote
+                            <button class="ui mini grey button" onclick="demoteParticipant('${participant.JID}')" title="Demonstraçãote from admin">
+                                <i class="star outline icon"></i> Demonstraçãote
                             </button>
                         `);
                     }
@@ -686,7 +686,7 @@ function createParticipantItem(participant) {
     `;
 }
 
-function filterGroups() {
+function filterGrupos() {
     const searchTerm = $('#groupsSearch').val().toLowerCase();
     const filterType = $('#groupsFilter').val();
     
@@ -742,7 +742,7 @@ function showCreateGroupModal() {
 
 async function loadContacts() {
     try {
-        const response = await getContactsForGroups();
+        const response = await getContactsForGrupos();
         if (response && Array.isArray(response)) {
             // Convert array format to object format expected by populateParticipantsDropdown
             contactsCache = {};
@@ -817,7 +817,7 @@ async function createGroup() {
             $('#modalCreateGroup').modal('hide');
             form[0].reset();
             $('#participantsDropdown').dropdown('clear');
-            loadGroups(); // Refresh groups list
+            loadGrupos(); // Refresh groups list
         } else {
             showError('Failed to create group: ' + (response.error || 'Unknown error'));
         }
@@ -894,7 +894,7 @@ async function joinGroup() {
             $('#modalJoinGroup').modal('hide');
             $('#joinGroupForm')[0].reset();
             $('#groupPreviewContainer').addClass('hidden');
-            loadGroups(); // Refresh groups list
+            loadGrupos(); // Refresh groups list
         } else {
             showError('Failed to join group: ' + (response.error || 'Unknown error'));
         }
@@ -911,7 +911,7 @@ function extractInviteCode(input) {
 }
 
 // API Functions
-async function getGroups() {
+async function getGrupos() {
     const token = getLocalStorageItem('token');
     const myHeaders = new Headers();
     myHeaders.append('token', token);
@@ -1109,7 +1109,7 @@ function toggleDescription(element) {
 function openGroupChat(groupJID) {
     // This would open the chat interface for the group
     // Implementation depends on your chat interface
-    //console.log('Opening chat for group:', groupJID);
+    //console.log('Abriring chat for group:', groupJID);
     showSuccess('Chat functionality would be opened here');
 }
 
@@ -1154,7 +1154,7 @@ function showEditGroupInfoModal() {
     if (!currentGroupId) return;
     
     // Get current group data
-    const groupData = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === currentGroupId) : null;
+    const groupData = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === currentGroupId) : null;
     if (groupData) {
         $('#editGroupNameInput').val(groupData.Name || '');
         $('#editGroupDescriptionInput').val(groupData.Topic || '');
@@ -1167,7 +1167,7 @@ function showGroupSettingsModal() {
     if (!currentGroupId) return;
     
     // Get current group data
-    const groupData = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === currentGroupId) : null;
+    const groupData = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === currentGroupId) : null;
     if (groupData) {
         // Set current settings
         $('#announceOnlyToggle').checkbox(groupData.IsAnnounce ? 'check' : 'uncheck');
@@ -1224,7 +1224,7 @@ function populateCurrentParticipantsList() {
     const participantsList = $('#manageParticipantsList');
     participantsList.empty();
     
-    const groupData = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === currentGroupId) : null;
+    const groupData = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === currentGroupId) : null;
     if (groupData && groupData.Participants) {
         const currentUserJID = getCurrentUserJID();
         const currentUserIsSuperAdmin = checkIfUserIsSuperAdmin(groupData, currentUserJID);
@@ -1251,7 +1251,7 @@ function populateCurrentParticipantsList() {
                     </button>
                 `);
                 
-                // Promote/Demote buttons - based on current user permissions
+                // Promote/Demonstraçãote buttons - based on current user permissions
                 if (currentUserIsSuperAdmin) {
                     // Super admins can promote/demote anyone
                     if (!participantIsAdmin && !participantIsSuperAdmin) {
@@ -1262,10 +1262,10 @@ function populateCurrentParticipantsList() {
                             </button>
                         `);
                     } else if (participantIsAdmin && !participantIsSuperAdmin) {
-                        // Demote from admin
+                        // Demonstraçãote from admin
                         buttons.push(`
-                            <button class="ui mini grey button" onclick="demoteParticipant('${participant.JID}')" title="Demote from admin">
-                                <i class="star outline icon"></i> Demote
+                            <button class="ui mini grey button" onclick="demoteParticipant('${participant.JID}')" title="Demonstraçãote from admin">
+                                <i class="star outline icon"></i> Demonstraçãote
                             </button>
                         `);
                     }
@@ -1316,7 +1316,7 @@ function populateAddParticipantsDropdown() {
     
     if (contactsCache && typeof contactsCache === 'object' && Object.keys(contactsCache).length > 0) {
         // Get current participants to exclude them
-        const groupData = groupsCache.Groups ? groupsCache.Groups.find(g => g.JID === currentGroupId) : null;
+        const groupData = groupsCache.Grupos ? groupsCache.Grupos.find(g => g.JID === currentGroupId) : null;
         const currentParticipants = groupData && groupData.Participants ? 
             groupData.Participants.map(p => p.JID.split('@')[0]) : [];
         
@@ -1761,7 +1761,7 @@ async function leaveGroup() {
             
             // Refresh groups list
             setTimeout(() => {
-                loadGroups();
+                loadGrupos();
             }, 1000);
         } else {
             throw new Error(response.error || 'Unknown error');

@@ -15,38 +15,38 @@
     <div class="main-header">
       <h1 class="ui header center aligned">
         <span class="title-container">
-          <i class="whatsapp icon"></i> Welcome to INOOVAZAP
+          <i class="whatsapp icon"></i> Bem-vindo ao InoovaZAP
         </span>
       </h1>
     </div>
 
     <div class="ui segment hidden" id="connectstatus"></div>
 
-    <div class="ui horizontal divider"> Session </div>
+    <div class="ui horizontal divider"> Sessão </div>
     <div class="ui three column stackable grid cards">
       <div class="green card" style="cursor: pointer;" id="authWidget">
-        <div class="content"><a class="ui teal right ribbon label">Session</a>
-          <div class="header">Authenticate</div>
-          <div class="description"> Enter or change authentication token. </div>
+        <div class="content"><a class="ui teal right ribbon label">Sessão</a>
+          <div class="header">Autenticar</div>
+          <div class="description"> Insira ou altere o token de autenticação. </div>
         </div>
       </div>
  
       <div class="green card hidden" style="cursor: pointer;" id="loginQR">
-        <div class="content"><a class="ui teal right ribbon label">Session</a>
-          <div class="header">Login with QR</div>
-          <div class="description"> Scan your QR code to access all API capabilities.</div>
+        <div class="content"><a class="ui teal right ribbon label">Sessão</a>
+          <div class="header">Login com QR Code</div>
+          <div class="description"> Escaneie o QR code para acessar as funções da API.</div>
         </div>
       </div>
       <div class="green card hidden" style="cursor: pointer;" id="loginCode">
-        <div class="content"><a class="ui teal right ribbon label">Session</a>
-          <div class="header">Login with Pairing Code</div>
-          <div class="description"> Enter your pairing code to log in and access your devices.</div>
+        <div class="content"><a class="ui teal right ribbon label">Sessão</a>
+          <div class="header">Login com Código de Pareamento</div>
+          <div class="description"> Insira seu código de pareamento para entrar e acessar seus dispositivos.</div>
         </div>
       </div>
       <div class="green card hidden" style="cursor: pointer;" id="logoutWidget">
-        <div class="content"><a class="ui teal right ribbon label">Session</a>
-          <div class="header">Logout</div>
-          <div class="description">Closes connection to WhatsApp servers and terminate session.</div>
+        <div class="content"><a class="ui teal right ribbon label">Sessão</a>
+          <div class="header">Sair</div>
+          <div class="description">Fecha a conexão com os servidores do WhatsApp e encerra a sessão.</div>
         </div>
       </div>
     </div>
@@ -67,8 +67,8 @@
       </div>
       <div class="green card hidden widget" style="cursor: pointer;" id="deleteWebhook">
         <div class="content"><a class="ui green right ribbon label">Webhook</a>
-          <div class="header">Delete Webhook</div>
-          <div class="description"> Deletes the current webhook.</div>
+          <div class="header">Excluir Webhook</div>
+          <div class="description"> Excluirs the current webhook.</div>
         </div>
       </div>
     </div>
@@ -83,8 +83,8 @@
       </div>
       <div class="blue card hidden widget" style="cursor: pointer;" id="deleteMessage">
         <div class="content"><a class="ui blue right ribbon label">Chat</a>
-          <div class="header">Delete Message</div>
-          <div class="description"> Deletes your sent message.</div>
+          <div class="header">Excluir Message</div>
+          <div class="description"> Excluirs your sent message.</div>
         </div>
       </div>
     </div>
@@ -111,8 +111,8 @@
       </div>
     </div>
 
-    <!-- Session Modals -->
-    <div class="ui modal" id="modalAuthenticate"><i class="close icon"></i>
+    <!-- Sessão Modals -->
+    <div class="ui modal" id="modalAutenticar"><i class="close icon"></i>
       <div class="header"> Enter Authentication Token </div>
       <div class="content">
         <div class="ui info danger hidden" id="invalidCredentials">
@@ -143,7 +143,7 @@
         </div>
         <div class="description">
           <div class="ui header">Please scan to connect</div>
-          <p>Open Setting > Linked Devices > Link Device</p>
+          <p>Abrir Setting > Linked Devices > Link Device</p>
         </div>
       </div>
     </div>
@@ -154,7 +154,7 @@
         <div class="ui message info">
           <div class="header" id="pairInfo">How to pair?</div>
           <ol id="pairHelp">
-            <li>Open your Whatsapp</li>
+            <li>Abrir your Whatsapp</li>
             <li>Link a device</li>
             <li>Link with pair code</li>
           </ol>
@@ -210,8 +210,8 @@
       </div>
     </div>
 
-    <div class="ui modal" id="modalDeleteWebhook"><i class="close icon"></i>
-      <div class="header"> Delete Webhook </div>
+    <div class="ui modal" id="modalExcluirWebhook"><i class="close icon"></i>
+      <div class="header"> Excluir Webhook </div>
       <div class="content">
           Are you sure?
       </div>
@@ -269,8 +269,8 @@
       </div>
     </div>
 
-     <div class="ui modal" id="modalDeleteMessage"><i class="close icon"></i>
-      <div class="header"> Delete Message </div>
+     <div class="ui modal" id="modalExcluirMessage"><i class="close icon"></i>
+      <div class="header"> Excluir Message </div>
       <div class="content">
         <div class="ui message info hidden" id="deleteMessageContainer"></div>
         <div class="ui form">
@@ -280,7 +280,7 @@
       </div>
       <div class="actions">
         <div class="ui cancel button">Close</div>
-        <div class="ui positive right labeled icon button">Delete<i class="trash icon"></i></div>
+        <div class="ui positive right labeled icon button">Excluir<i class="trash icon"></i></div>
       </div>
     </div>
 
@@ -367,7 +367,7 @@
     });
 
     document.getElementById('authWidget').addEventListener('click', function() {
-      $('#modalAuthenticate').modal({closable:false}).modal('show');
+      $('#modalAutenticar').modal({closable:false}).modal('show');
     });
 
     document.getElementById('loginCode').addEventListener('click', function() {
@@ -424,7 +424,7 @@
     document.getElementById('deleteMessage').addEventListener('click', function() {
       document.getElementById('deleteMessageContainer').innerHTML='';
       document.getElementById("deleteMessageContainer").classList.add('hidden');
-      $('#modalDeleteMessage').modal({onApprove: function() {
+      $('#modalExcluirMessage').modal({onApprove: function() {
         deleteMessage().then((result)=>{
           console.log(result);
           document.getElementById("deleteMessageContainer").classList.remove('hidden');
@@ -447,7 +447,7 @@
     });
 
     document.getElementById('deleteWebhook').addEventListener('click', function() {
-    $('#modalDeleteWebhook')
+    $('#modalExcluirWebhook')
       .modal({
         closable: true,
         onDeny: function(){
@@ -574,13 +574,13 @@
       }
       userInfo(phone).then((data) => {
         document.getElementById("userInfoContainer").classList.remove('hidden');
-        if (data.success && data.data && data.data.Users) {
+        if (data.success && data.data && data.data.Usuários) {
             // Clear previous results
             const userInfoDiv = document.getElementById('userInfoContainer');
             userInfoDiv.innerHTML = '';
             
             // Loop through each user
-            for (const [userJid, userData] of Object.entries(data.data.Users)) {
+            for (const [userJid, userData] of Object.entries(data.data.Usuários)) {
                 const userElement = document.createElement('div');
                 userElement.className = 'user-entry';
                 
@@ -655,7 +655,7 @@
       if(status.success==true) {
         if(status.data.LoggedIn === true) {
           scanned = true;
-          document.getElementById("connectstatus").innerHTML = "Connected!";
+          document.getElementById("connectstatus").innerHTML = "Conectado!";
           document.getElementById("connectstatus").classList.remove('red');
           document.getElementById("connectstatus").classList.add('green');
           document.getElementById("connectstatus").classList.remove('hidden');
@@ -937,7 +937,7 @@
 
   if(notoken==1) {
     document.getElementById("connectstatus").innerHTML = "No auth token specified";
-    $('#modalAuthenticate').modal({closable:false}).modal('show');
+    $('#modalAutenticar').modal({closable:false}).modal('show');
   } else {
 
     token = param["token"][0];
@@ -945,17 +945,17 @@
     statusRequest().then((status) => {
       if(status.success==true) {
           if(status.data.LoggedIn === false) {
-              if(status.data.Connected === true) {
+              if(status.data.Conectado === true) {
                   showQr();
               } else {
                   console.log("Not connected, attempting to connect.");
                   connect().then((data) => {console.log("promise connect 1"); console.log(data);});
               }
           } else {
-              if(status.data.Connected === false) {
+              if(status.data.Conectado === false) {
                   connect().then((data) => {console.log("promise connect 2"); console.log(data);});
               }
-              document.getElementById("connectstatus").innerHTML = "Connected!";
+              document.getElementById("connectstatus").innerHTML = "Conectado!";
               document.getElementById("connectstatus").classList.remove('red');
               document.getElementById("connectstatus").classList.add('green');
               document.getElementById("connectstatus").classList.remove('hidden');
@@ -975,7 +975,7 @@
               document.getElementById("connectstatus").innerHTML = "Invalid Token";
               document.getElementById('connectstatus').classList.remove('hidden');
               document.getElementById('invalidCredentials').classList.remove('hidden');
-              $('#modalAuthenticate').modal({closable:false}).modal('show');
+              $('#modalAutenticar').modal({closable:false}).modal('show');
           }
       } else {
           document.getElementById("connectstatus").innerHTML = `Bad Authentication ${status.Status}`;
