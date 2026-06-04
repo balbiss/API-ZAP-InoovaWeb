@@ -2,7 +2,7 @@
 <html lang="en"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WUZAPI - REST API for WhatsApp</title>
+    <title>INOOVAZAP - REST API for WhatsApp</title>
     <link rel="icon" href="/images/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,8 +15,8 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="/images/favicon.png" alt="WUZAPI Logo">
-                <h1>WUZAPI</h1>
+                <img src="/images/favicon.png" alt="INOOVAZAP Logo">
+                <h1>INOOVAZAP</h1>
             </div>
 
             <button class="menu-toggle" aria-label="Toggle menu">
@@ -42,11 +42,11 @@
         <div class="container">
             <div class="hero-content">
                 <h2 class="xfade-in">REST API for WhatsApp</h2>
-                <p class="xfade-in">WUZAPI is an implementation of the whatsmeow library as a simple RESTful API service, with support for multiple devices and concurrent sessions.</p>
+                <p class="xfade-in">INOOVAZAP is an implementation of the whatsmeow library as a simple RESTful API service, with support for multiple devices and concurrent sessions.</p>
                 <div class="btn-group xfade-in">
                     <a href="/dashboard" class="btn"><i class="fas fa-tachometer-alt"></i> Access Dashboard</a>
                     <a href="/api" class="btn"><i class="fas fa-code"></i> API Documentation</a>
-                    <a href="https://github.com/asternic/wuzapi" class="btn outline"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/asternic/INOOVAZAP" class="btn outline"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Main Features</h2>
-                <p>WUZAPI offers a complete API to interact with WhatsApp efficiently without using heavy resources like Puppeteer or Android emulators.</p>
+                <p>INOOVAZAP offers a complete API to interact with WhatsApp efficiently without using heavy resources like Puppeteer or Android emulators.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card fade-in">
@@ -113,7 +113,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>API Endpoints</h2>
-                <p>WUZAPI offers several endpoints to interact with WhatsApp, organized into functional categories.</p>
+                <p>INOOVAZAP offers several endpoints to interact with WhatsApp, organized into functional categories.</p>
             </div>
             <div class="api-endpoints">
                 <div class="endpoint-card slide-in-left">
@@ -194,7 +194,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Interactive Demo</h2>
-                <p>See how easy it is to use the WUZAPI API to interact with WhatsApp.</p>
+                <p>See how easy it is to use the INOOVAZAP API to interact with WhatsApp.</p>
             </div>
             <div class="demo-container">
                 <div class="phone-mockup zoom-in">
@@ -202,7 +202,7 @@
                         <div class="chat-header">
                             <div class="chat-avatar">W</div>
                             <div class="chat-info">
-                                <h4>WUZAPI Assistant</h4>
+                                <h4>INOOVAZAP Assistant</h4>
                                 <small>Online</small>
                             </div>
                         </div>
@@ -229,13 +229,13 @@
         <div class="container">
             <div class="section-title">
                 <h2>How to Use</h2>
-                <p>Instructions to start using WUZAPI quickly.</p>
+                <p>Instructions to start using INOOVAZAP quickly.</p>
             </div>
             
             <div class="installation-steps">
                 <div class="step fade-in">
                     <h3><i class="fas fa-list-ol"></i> Prerequisites</h3>
-                    <p>To run WUZAPI, you need:</p>
+                    <p>To run INOOVAZAP, you need:</p>
                     <ul style="padding-left: 2em; margin-top:1em;">
                         <li>Go (Go Programming Language)</li>
                         <li>Docker (optional, for containerization)</li>
@@ -253,20 +253,20 @@
  
                 <div class="step fade-in">
                     <h3><i class="fas fa-cog"></i> Configuration</h3>
-                    <p>WuzAPI uses a .env file for configuration. Here are the required settings:</p>
+                    <p>INOOVAZAP uses a .env file for configuration. Here are the required settings:</p>
                     <h4>For PostgresSQL</h4>
                     <div class="code-block" data-language="bash">
-<pre>WUZAPI_ADMIN_TOKEN=your_admin_token_here
-USER=wuzapi
-PASSWORD=wuzapi
-NAME=wuzapi
+<pre>INOOVAZAP_ADMIN_TOKEN=your_admin_token_here
+USER=INOOVAZAP
+PASSWORD=INOOVAZAP
+NAME=INOOVAZAP
 HOST=localhost
 PORT=5432
 America/New_York</pre>
                     </div>
                     <h4>For SQLite</h4>
                     <div class="code-block" data-language="bash">
-<pre>WUZAPI_ADMIN_TOKEN=your_admin_token_here
+<pre>INOOVAZAP_ADMIN_TOKEN=your_admin_token_here
 TZ=America/New_York</pre>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ TZ=America/New_York</pre>
                     </ul>
                     <div style="margin-top:1em;">Example:</div>
                     <div class="code-block" data-language="bash">
-                        <pre>./wuzapi -logtype json</pre>
+                        <pre>./INOOVAZAP -logtype json</pre>
                     </div>
                 </div>
                 
@@ -296,7 +296,7 @@ TZ=America/New_York</pre>
                     <p>To open sessions, you first need to create a user and define an authentication token for it. You can do this login into the <a href='/dashboard'>Dashboard</a>, or using the API directly:</p>
                     <div class="code-block" data-language="bash">
 <pre>curl -X POST http://localhost:8080/admin/users \
--H "Authorization: $WUZAPI_ADMIN_TOKEN" \
+-H "Authorization: $INOOVAZAP_ADMIN_TOKEN" \
 -H "Content-Type: application/json" \
 -d '{"name": "John", "token": "Z1234ABCCXD"}'</pre>
                     </div>
@@ -321,7 +321,7 @@ TZ=America/New_York</pre>
             <div class="donation-container fade-in">
                 <div class="donation-header">
                     <h2>Support the Project</h2>
-                    <p>If you like WUZAPI and want to help keep the project active and in development, consider making a donation. Your support is very important!</p>
+                    <p>If you like INOOVAZAP and want to help keep the project active and in development, consider making a donation. Your support is very important!</p>
                 </div>
                 <div class="donation-options">
                     <div class="donation-qrcode zoom-in">
@@ -349,10 +349,10 @@ TZ=America/New_York</pre>
         <div class="container">
             <div class="footer-container">
                 <div class="footer-brand">
-                    <img src="/images/favicon.png" alt="WUZAPI Logo">
-                    <p>WUZAPI is a REST API for WhatsApp, implementing the whatsmeow library for direct communication with WhatsApp servers.</p>
+                    <img src="/images/favicon.png" alt="INOOVAZAP Logo">
+                    <p>INOOVAZAP is a REST API for WhatsApp, implementing the whatsmeow library for direct communication with WhatsApp servers.</p>
                     <div class="social-links">
-                        <a href="https://github.com/asternic/wuzapi" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/asternic/INOOVAZAP" target="_blank" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -370,8 +370,8 @@ TZ=America/New_York</pre>
                 <div class="footer-links">
                     <h3>Support</h3>
                     <ul>
-                        <li><a href="https://github.com/asternic/wuzapi/issues" target="_blank">Report Issues</a></li>
-                        <li><a href="https://github.com/asternic/wuzapi" target="_blank">Contribute</a></li>
+                        <li><a href="https://github.com/asternic/INOOVAZAP/issues" target="_blank">Report Issues</a></li>
+                        <li><a href="https://github.com/asternic/INOOVAZAP" target="_blank">Contribute</a></li>
                     </ul>
                 </div>
             </div>

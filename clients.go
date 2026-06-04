@@ -16,7 +16,7 @@ type ClientManager struct {
 	// userID then on the poll's message ID. This lets the event handler
 	// SHA-256-match incoming vote hashes back to the original option text
 	// before emitting the webhook payload. Entries are best-effort and
-	// in-memory only — if wuzapi restarts between send and vote, plaintext
+	// in-memory only — if INOOVAZAP restarts between send and vote, plaintext
 	// resolution is skipped and the webhook falls back to hashes only.
 	pollOptions map[string]map[string][]string
 }
@@ -104,7 +104,7 @@ func (cm *ClientManager) SetPollOptions(userID, msgID string, options []string) 
 }
 
 // GetPollOptions returns the plaintext options associated with a poll
-// message, or nil if none were recorded (e.g. wuzapi restarted after the
+// message, or nil if none were recorded (e.g. INOOVAZAP restarted after the
 // poll was sent).
 func (cm *ClientManager) GetPollOptions(userID, msgID string) []string {
 	cm.RLock()

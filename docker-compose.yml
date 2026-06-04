@@ -1,25 +1,25 @@
 services:
-  wuzapi-server:
+  INOOVAZAP-server:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "${WUZAPI_PORT:-8080}:8080"
+      - "${INOOVAZAP_PORT:-8080}:8080"
     environment:
-      - WUZAPI_ADMIN_TOKEN=${WUZAPI_ADMIN_TOKEN}
-      - WUZAPI_GLOBAL_ENCRYPTION_KEY=${WUZAPI_GLOBAL_ENCRYPTION_KEY}
-      - WUZAPI_GLOBAL_HMAC_KEY=${WUZAPI_GLOBAL_HMAC_KEY:-}
-      - WUZAPI_GLOBAL_WEBHOOK=${WUZAPI_GLOBAL_WEBHOOK:-}
-      - DB_USER=${DB_USER:-wuzapi}
-      - DB_PASSWORD=${DB_PASSWORD:-wuzapi}
-      - DB_NAME=${DB_NAME:-wuzapi}
+      - INOOVAZAP_ADMIN_TOKEN=${INOOVAZAP_ADMIN_TOKEN}
+      - INOOVAZAP_GLOBAL_ENCRYPTION_KEY=${INOOVAZAP_GLOBAL_ENCRYPTION_KEY}
+      - INOOVAZAP_GLOBAL_HMAC_KEY=${INOOVAZAP_GLOBAL_HMAC_KEY:-}
+      - INOOVAZAP_GLOBAL_WEBHOOK=${INOOVAZAP_GLOBAL_WEBHOOK:-}
+      - DB_USER=${DB_USER:-INOOVAZAP}
+      - DB_PASSWORD=${DB_PASSWORD:-INOOVAZAP}
+      - DB_NAME=${DB_NAME:-INOOVAZAP}
       - DB_HOST=db
       - DB_PORT=${DB_PORT:-5432}
       - TZ=${TZ:-America/Sao_Paulo}
       - WEBHOOK_FORMAT=${WEBHOOK_FORMAT:-json}
-      - SESSION_DEVICE_NAME=${SESSION_DEVICE_NAME:-WuzAPI}
+      - SESSION_DEVICE_NAME=${SESSION_DEVICE_NAME:-INOOVAZAP}
       # RabbitMQ configuration Optional
-      - RABBITMQ_URL=amqp://wuzapi:wuzapi@rabbitmq:5672/
+      - RABBITMQ_URL=amqp://INOOVAZAP:INOOVAZAP@rabbitmq:5672/
       - RABBITMQ_QUEUE=whatsapp_events
     depends_on:
       db:
@@ -27,23 +27,23 @@ services:
       rabbitmq:
         condition: service_healthy
     networks:
-      - wuzapi-network
+      - INOOVAZAP-network
     restart: on-failure
 
   db:
     image: postgres:16
     environment:
-      POSTGRES_USER: ${DB_USER:-wuzapi}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-wuzapi}
-      POSTGRES_DB: ${DB_NAME:-wuzapi}
+      POSTGRES_USER: ${DB_USER:-INOOVAZAP}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-INOOVAZAP}
+      POSTGRES_DB: ${DB_NAME:-INOOVAZAP}
     # ports:
     #   - "${DB_PORT:-5432}:5432" # Uncomment to access the database directly from your host machine.
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - wuzapi-network
+      - INOOVAZAP-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-wuzapi}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-INOOVAZAP}"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -53,8 +53,8 @@ services:
     image: rabbitmq:3-management
     hostname: rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: wuzapi
-      RABBITMQ_DEFAULT_PASS: wuzapi
+      RABBITMQ_DEFAULT_USER: INOOVAZAP
+      RABBITMQ_DEFAULT_PASS: INOOVAZAP
       RABBITMQ_DEFAULT_VHOST: /
     ports:
       - "5672:5672" # AMQP port
@@ -62,7 +62,7 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     networks:
-      - wuzapi-network
+      - INOOVAZAP-network
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 10s
@@ -71,7 +71,7 @@ services:
     restart: always
 
 networks:
-  wuzapi-network:
+  INOOVAZAP-network:
     driver: bridge
 
 volumes:

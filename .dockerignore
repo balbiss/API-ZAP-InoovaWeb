@@ -13,7 +13,7 @@ dbdata/
 files/
 
 # Build artifacts and binaries
-wuzapi
+INOOVAZAP
 *.exe
 *.o
 *.out

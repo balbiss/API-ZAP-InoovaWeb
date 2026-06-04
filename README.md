@@ -1,6 +1,6 @@
-# WUZAPI
+# INOOVAZAP
 
-<img src="static/favicon.ico" width="30"> WuzAPI is an implementation 
+<img src="static/favicon.ico" width="30"> INOOVAZAP is an implementation 
 of the [@tulir/whatsmeow](https://github.com/tulir/whatsmeow) library as a 
 simple RESTful API service with multiple device support and concurrent 
 sessions.
@@ -67,10 +67,10 @@ go build .
 
 ## Homebrew installation
 
-To install `wuzapi` via [Homebrew](https://brew.sh) use:
+To install `INOOVAZAP` via [Homebrew](https://brew.sh) use:
 
 ```sh
-brew install asternic/wuzapi/wuzapi
+brew install asternic/INOOVAZAP/INOOVAZAP
 ```
 
 ## Run
@@ -95,22 +95,22 @@ Example:
 To have colored logs:
 
 ```
-./wuzapi -logtype=console -color=true
+./INOOVAZAP -logtype=console -color=true
 ```
 
 For JSON logs:
 
 ```
-./wuzapi -logtype json 
+./INOOVAZAP -logtype json 
 ```
 
 With time zone: 
 
-Set `TZ=America/New_York ./wuzapi ...` in your shell or in your .env file or Docker Compose environment: `TZ=America/New_York`.  
+Set `TZ=America/New_York ./INOOVAZAP ...` in your shell or in your .env file or Docker Compose environment: `TZ=America/New_York`.  
 
 ## Configuration
 
-WuzAPI uses a `.env` file for configuration. You can use the provided `.env.sample` as a template:
+INOOVAZAP uses a `.env` file for configuration. You can use the provided `.env.sample` as a template:
 
 ```bash
 cp .env.sample .env
@@ -120,14 +120,14 @@ cp .env.sample .env
 
 #### Required Settings
 ```
-WUZAPI_ADMIN_TOKEN=your_admin_token_here
+INOOVAZAP_ADMIN_TOKEN=your_admin_token_here
 ```
 
 #### Security Settings
 
 ```
-WUZAPI_GLOBAL_ENCRYPTION_KEY=your_32_byte_encryption_key_here
-WUZAPI_GLOBAL_HMAC_KEY=your_global_hmac_key_here
+INOOVAZAP_GLOBAL_ENCRYPTION_KEY=your_32_byte_encryption_key_here
+INOOVAZAP_GLOBAL_HMAC_KEY=your_global_hmac_key_here
 ```
 
 #### Optional Settings
@@ -135,34 +135,34 @@ WUZAPI_GLOBAL_HMAC_KEY=your_global_hmac_key_here
 ```
 TZ=America/New_York
 WEBHOOK_FORMAT=json
-SESSION_DEVICE_NAME=WuzAPI
-WUZAPI_PORT=8080
-WUZAPI_GLOBAL_WEBHOOK=https://your-global-webhook.url
+SESSION_DEVICE_NAME=INOOVAZAP
+INOOVAZAP_PORT=8080
+INOOVAZAP_GLOBAL_WEBHOOK=https://your-global-webhook.url
 WEBHOOK_RETRY_ENABLED=true
 WEBHOOK_RETRY_COUNT=2
 WEBHOOK_RETRY_DELAY_SECONDS=30
-WEBHOOK_ERROR_QUEUE_NAME=wuzapi_dead_letter_webhooks
+WEBHOOK_ERROR_QUEUE_NAME=INOOVAZAP_dead_letter_webhooks
 ```
 
 ### Important Notes
 
 #### Auto-Generated Credentials
 If the following settings are not provided, they will be auto-generated:
-* `WUZAPI_ADMIN_TOKEN`: Random 32-character token
-* `WUZAPI_GLOBAL_ENCRYPTION_KEY`: Random 32-byte key for AES-256 encryption
+* `INOOVAZAP_ADMIN_TOKEN`: Random 32-character token
+* `INOOVAZAP_GLOBAL_ENCRYPTION_KEY`: Random 32-byte key for AES-256 encryption
 
 **Important**: Save auto-generated credentials to your `.env` file or you will lose access to encrypted data and admin functions on restart!
 
 #### Webhook Security
-* `WUZAPI_GLOBAL_HMAC_KEY`: Global HMAC key for webhook signing (minimum 32 characters)
+* `INOOVAZAP_GLOBAL_HMAC_KEY`: Global HMAC key for webhook signing (minimum 32 characters)
 
 #### Database Configuration
 
 **For PostgreSQL:**
 ```
-DB_USER=wuzapi
-DB_PASSWORD=wuzapi
-DB_NAME=wuzapi
+DB_USER=INOOVAZAP
+DB_PASSWORD=INOOVAZAP
+DB_NAME=INOOVAZAP
 DB_HOST=db  # Use 'db' when running with Docker Compose, or 'localhost' for native execution
 DB_PORT=5432
 DB_SSLMODE=false
@@ -175,13 +175,13 @@ No database configuration needed - SQLite is used by default if no PostgreSQL se
 ```
 TZ=America/New_York
 WEBHOOK_FORMAT=json # or "form" for the default
-SESSION_DEVICE_NAME=WuzAPI
-WUZAPI_PORT=8080 # Port for the WuzAPI server
-WUZAPI_GLOBAL_WEBHOOK= # Global webhook URL for all instances
+SESSION_DEVICE_NAME=INOOVAZAP
+INOOVAZAP_PORT=8080 # Port for the INOOVAZAP server
+INOOVAZAP_GLOBAL_WEBHOOK= # Global webhook URL for all instances
 ```
 
 ### RabbitMQ Integration
-WuzAPI supports sending WhatsApp events to a RabbitMQ queue for global event distribution. When enabled, all WhatsApp events will be published to the specified queue regardless of individual user webhook configurations.
+INOOVAZAP supports sending WhatsApp events to a RabbitMQ queue for global event distribution. When enabled, all WhatsApp events will be published to the specified queue regardless of individual user webhook configurations.
 
 Set these environment variables to enable RabbitMQ integration:
 
@@ -199,10 +199,10 @@ When enabled:
 
 ### Webhook Security with HMAC
 
-WuzAPI supports HMAC signatures for webhook verification:
+INOOVAZAP supports HMAC signatures for webhook verification:
 
 * **Per-instance HMAC**: Configure unique HMAC keys for each user instance
-* **Global HMAC**: Set a global HMAC key via `WUZAPI_GLOBAL_HMAC_KEY` environment variable
+* **Global HMAC**: Set a global HMAC key via `INOOVAZAP_GLOBAL_HMAC_KEY` environment variable
 * **Signature Header**: All signed webhooks include `x-hmac-signature` header
 * **Key Security**: HMAC keys are never exposed after configuration
 
@@ -212,7 +212,7 @@ Configure HMAC keys via the Dashboard or using the `/session/hmac/config` API en
 
 #### Key configuration options:
 
-* WUZAPI_ADMIN_TOKEN: Required - Authentication token for admin endpoints
+* INOOVAZAP_ADMIN_TOKEN: Required - Authentication token for admin endpoints
 * TZ: Optional - Timezone for server operations (default: UTC)
 * PostgreSQL-specific options: Only required when using PostgreSQL backend
 * RabbitMQ options: Optional, only required if you want to publish events to RabbitMQ
@@ -228,8 +228,8 @@ The Docker configuration will:
 
 **Key differences for Docker deployment:**
 - Set `DB_HOST=db` instead of `localhost` to connect to the PostgreSQL container
-- The `WUZAPI_PORT` variable controls the external port mapping in `docker-compose.yml`
-- In swarm mode, `WUZAPI_PORT` configures the Traefik load balancer port
+- The `INOOVAZAP_PORT` variable controls the external port mapping in `docker-compose.yml`
+- In swarm mode, `INOOVAZAP_PORT` configures the Traefik load balancer port
 
 **Note:** The `.env` file is already included in `.gitignore` to avoid committing sensitive information to your repository.
 
@@ -243,7 +243,7 @@ To interact with the API, you must include the `Authorization` header in HTTP re
 
 ## ADMIN Actions
 
-You can list, add and remove users using the admin endpoints. For that you must use the WUZAPI_ADMIN_TOKEN in the Authorization header
+You can list, add and remove users using the admin endpoints. For that you must use the INOOVAZAP_ADMIN_TOKEN in the Authorization header
 
 Then you can use the /admin/users endpoint with the Authorization header containing the token to:
 
@@ -310,7 +310,7 @@ If you omit `proxyConfig` or `s3Config`, the user will be created without proxy 
 API calls should be made with content type json, and parameters sent into the
 request body, always passing the Token header for authenticating the request.
 
-Check the [API Reference](https://github.com/asternic/wuzapi/blob/main/API.md)
+Check the [API Reference](https://github.com/asternic/INOOVAZAP/blob/main/API.md)
 
 ## Contributors
 
@@ -501,11 +501,11 @@ Check the [API Reference](https://github.com/asternic/wuzapi/blob/main/API.md)
 
 ## Clients
 
-- [wuzapi TypeScript / Node Client](https://github.com/gusnips/wuzapi-node)
+- [INOOVAZAP TypeScript / Node Client](https://github.com/gusnips/INOOVAZAP-node)
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=asternic/wuzapi&type=Date)](https://www.star-history.com/#asternic/wuzapi&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=asternic/INOOVAZAP&type=Date)](https://www.star-history.com/#asternic/INOOVAZAP&Date)
 
 ## License
 

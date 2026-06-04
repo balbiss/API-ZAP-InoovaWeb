@@ -3,7 +3,7 @@ package main
 // Group join-request handlers (membership approval queue).
 //
 // WhatsApp groups can require admin approval for new members. whatsmeow exposes
-// the underlying calls but upstream wuzapi did not surface them, so these three
+// the underlying calls but upstream INOOVAZAP did not surface them, so these three
 // handlers wrap them:
 //   GET  /group/requestparticipants        -> list pending join requests
 //   POST /group/updaterequestparticipants  -> approve/reject pending requests

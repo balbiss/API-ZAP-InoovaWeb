@@ -1,4 +1,4 @@
-module wuzapi
+module INOOVAZAP
 
 go 1.25.0
 

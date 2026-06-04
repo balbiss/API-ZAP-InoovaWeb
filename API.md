@@ -3,7 +3,7 @@
 The API supports two authentication methods:
 
 1. **User Token**: For regular endpoints, use the `Authorization` header with the user's token value.
-2. **Admin Token**: For admin endpoints (/admin/**), use the `Authorization` header with the admin token value (set in WUZAPI_ADMIN_TOKEN).
+2. **Admin Token**: For admin endpoints (/admin/**), use the `Authorization` header with the admin token value (set in INOOVAZAP_ADMIN_TOKEN).
 
 ### Request Requirements
 
@@ -14,7 +14,7 @@ The API supports two authentication methods:
 
 ## Admin Endpoints (User Management)
 
-The following admin-only endpoints are used to manage users in the system. All require the Authorization header with the admin token (WUZAPI_ADMIN_TOKEN).
+The following admin-only endpoints are used to manage users in the system. All require the Authorization header with the admin token (INOOVAZAP_ADMIN_TOKEN).
 
 
 ## List All Users
@@ -25,7 +25,7 @@ Returns a list of registered users.
 
 Example Request:
 ```
-curl -s -X GET -H 'Authorization: {{WUZAPI_ADMIN_TOKEN}}' http://localhost:8080/admin/users
+curl -s -X GET -H 'Authorization: {{INOOVAZAP_ADMIN_TOKEN}}' http://localhost:8080/admin/users
 ```
 
 Response:
@@ -54,7 +54,7 @@ Adds a new user
 
 Example Request:
 ```
-curl -s -X POST -H 'Authorization: {{WUZAPI_ADMIN_TOKEN}}' -H 'Content-Type: application/json' --data '{"name":"usuario2","token":"token2","webhook":"https://example.com/webhook2","events":"Message,ReadReceipt"}' http://localhost:8080/admin/users
+curl -s -X POST -H 'Authorization: {{INOOVAZAP_ADMIN_TOKEN}}' -H 'Content-Type: application/json' --data '{"name":"usuario2","token":"token2","webhook":"https://example.com/webhook2","events":"Message,ReadReceipt"}' http://localhost:8080/admin/users
 ```
 
 Response:
@@ -118,7 +118,7 @@ Deletes one user from the system by ID
 
 Example Request:
 ```
-curl -s -X DELETE -H 'Authorization: {{WUZAPI_ADMIN_TOKEN}}' http://localhost:8080/admin/users/2
+curl -s -X DELETE -H 'Authorization: {{INOOVAZAP_ADMIN_TOKEN}}' http://localhost:8080/admin/users/2
 ```
 
 Response:
@@ -879,7 +879,7 @@ curl -X POST -H 'Token: 1234ABCD' -H 'Content-Type: application/json' --data '{
   "Sticker":"data:image/webp;base64,iVBORw0KGgoAAAANSU...",
   "PackId":"com.example.my.pack",
   "PackName":"My Pack",
-  "PackPublisher":"Wuzapi",
+  "PackPublisher":"INOOVAZAP",
   "Emojis":["😂","😍","👍","🎉"],
   "PngThumbnail":"data:image/png;base64,iVBORw0KGgoAAAANSU..."
 }' http://localhost:8080/chat/send/sticker
@@ -1452,11 +1452,11 @@ Response:
 }
 ```
 
-# S3 Storage Integration for WuzAPI
+# S3 Storage Integration for INOOVAZAP
 
 ## Overview
 
-WuzAPI now supports S3-compatible storage for media files, allowing you to store WhatsApp media (images, videos, audio, and documents) in cloud storage services instead of or in addition to base64 encoding in webhooks.
+INOOVAZAP now supports S3-compatible storage for media files, allowing you to store WhatsApp media (images, videos, audio, and documents) in cloud storage services instead of or in addition to base64 encoding in webhooks.
 
 ## Features
 
