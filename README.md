@@ -1,6 +1,6 @@
-# INOOVAZAP
+# InoovaZAP
 
-<img src="static/favicon.ico" width="30"> INOOVAZAP is an implementation 
+<img src="static/images/favicon.png" width="30"> InoovaZAP is an implementation 
 of the [@tulir/whatsmeow](https://github.com/tulir/whatsmeow) library as a 
 simple RESTful API service with multiple device support and concurrent 
 sessions.
