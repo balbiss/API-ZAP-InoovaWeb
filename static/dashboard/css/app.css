@@ -1,15 +1,15 @@
 :root {
-  --primary-color: #00A884; /* WhatsApp's new brand green */
-  --secondary-color: #008069; /* WhatsApp's darker green */
-  --tertiary-color: #075E54; /* WhatsApp's darkest green */
+  --primary-color: #1da55d;
+  --secondary-color: #168a49;
+  --tertiary-color: #0d5e2f;
   --background-color: #f0f2f5;
   --card-hover-color: #ffffff;
-  --text-color: #111B21; /* WhatsApp's text color */
-  --gradient-start: #00A884;
-  --gradient-end: #008069;
+  --text-color: #111B21;
+  --gradient-start: #0fa3db;
+  --gradient-end: #1da55d;
   --message-background: #FFFFFF;
-  --success-green: #00A884;
-  --gradient-primary: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  --success-green: #1da55d;
+  --gradient-primary: linear-gradient(135deg, #0fa3db 0%, #1da55d 100%);
 }
 
 body {
